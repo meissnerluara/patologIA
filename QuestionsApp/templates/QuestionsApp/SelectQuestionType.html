@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'assets/css/table_scrollbar.css' %}">
+{% endblock custom_css %}
+{% block content %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Elaboração Questionário Professor</h2>
+            
+            <div id="form-view">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-floating mb-3">
+                        {{form.Category}}
+                    </div>
+
+                    
+
+                    <div>
+                        <!-- <a href="{% url 'QuestionsApp:CreateQuestionView' %}" class="btn btn-primary btn-lg active" role="submit" type="submit" aria-pressed="true">Elaborar Questões</a> -->
+                        <input type="submit" class="btn btn-primary btn-lg active" value="Enviar">
+
+                    </div>
+                </form>
+
+            </div>
+           
+        </div>
+
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/questionario.png' %}" draggable="false" alt="Questionario Professor"
+                    class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block page_custom_js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // hide the forms when page is ready
+        $('#table-view').hide();
+
+        $('#cIncluir').click(function () {
+            $('#table-view').hide();
+            $('#form-view').show();
+        });
+        $('#cAlterar').click(function () {
+            $('#table-view').show();
+            $('#form-view').hide();
+        });
+        $('#cExcluir').click(function () {
+            $('#table-view').show();
+            $('#form-view').hide();
+        })
+    });
+
+
+    document.getElementById('cPesquisar').addEventListener('click', function () {
+        location.reload();
+    });
+
+
+</script>
+{% endblock page_custom_js %}

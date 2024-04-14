@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Estudo de Casos</h2>
+                <!-- <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+                    <label class="btn btn-info active">
+                    <input type="radio" name="options" id="cIncluir" autocomplete="off" checked> Incluir
+                    </label>
+                </div>
+
+                <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+                    <label class="btn btn-info active">
+                    <input type="radio" name="options" id="cAlterar" autocomplete="off" checked> Alterar
+                    </label>
+                </div>
+                
+                <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+                    <label class="btn btn-info active">
+                    <input type="radio" name="options" id="cExcluir" autocomplete="off" checked> Excluir
+                    </label>
+                </div>
+                
+                <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+                    <label class="btn btn-info active">
+                    <input type="radio" name="options" id="cVisualizar" autocomplete="off" checked> Visualizar
+                    </label>
+                </div> -->
+                <!-- Parâmetro  enctype="multipart/form-data" permite o preview da imagem-->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% if user.is_authenticated %}
+                    {% if not request.user.Role.Role_Type == "estudante" %}
+                    
+                    <div class="form-floating mb-3">
+                    <label for="numeroCaso">Número do Estudo de Caso</label>
+                        {{form.CaseStudyNumber}}
+                    </div>
+                    <div class="form-floating mb-3">
+                    <label for="descricaoCaso">Descrição do Estudo de Caso</label>
+                        {{form.CaseStudyFileName}}
+                    </div>
+                
+                    
+                    <div class="form-floating mb-3">
+                        <div class="custom-file" id="cFile">
+                          {{form.CaseStudyFile}}
+                          <label class="custom-file-label" for="CaseStudyFile">Escolher arquivo do Estudo de Caso</label>
+                        </div>
+                      </div>
+
+                      <input type="submit" value="Enviar" name="btnSubmit" class="btn btn-submit active">
+                      {% else %}
+                      <div class="form-floating mb-3">
+                        {{form.CaseStudyNumber}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.CaseStudyFileName}}
+                    </div>
+                    <input type="submit" value="Search" name="btnSearch" class="btn btn-submit active">
+                    {% endif %}
+                    {% endif %}
+
+
+                   {% if result %}
+
+                   <table class="table">
+                    <thead>
+                    <tr>
+                        <td>Numero de Serie</td>
+                        <td>Arquivo</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in result %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="{{file.CaseStudyFile.url}}">{{file.CaseStudyFile.url}}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                   </table>
+                   {% endif %} 
+                   
+
+                </form>
+        </div>
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/estudoCasos.png' %}" draggable="false" alt="Cadastro Estudo de Casos" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+<section class="footer7 cid-sHle78AHco" once="footers" id="footer7-1h">
+    <div class="container">
+        <div class="media-container-row align-center mbr-white">
+            <div class="col-12">
+                <p class="mbr-text mb-0 mbr-fonts-style display-7">
+                    © Copyright 2024 César A. S. Lima</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

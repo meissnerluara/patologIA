@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container col-11 md-9" id="form-container">
+  <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+  <div class="row align-items-center-gx-5">
+    <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+    <div class="col-md-6 order-md-2" id="main-container">
+      <h2>Cadastro de Imagens</h2>
+      <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+
+       
+
+        <input type="button" class="btn btn-info" name="options" id="cAlterar" value="Alterar">
+
+        <input type="button" class="btn btn-info" name="options" id="cExcluir" value="Excluir">
+
+        <input type="button" class="btn btn-info" name="options" id="cPesquisar" value="Limpar">
+
+      </div>
+      <div id="insert-form-container">
+        <!-- Parâmetro  enctype="multipart/form-data" permite o preview da imagem-->
+        <form method='post' enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-floating mb-3">
+            <div class="custom-file" id="cFile">
+              <!-- <input type="file" class="custom-file-input" id="imagem" name="imagem" accept="image/bmp, image/jpeg, image/png, image/tiff" draggable="false" aria-describedby="inputFileAddon" onchange="previewImage()"> -->
+              {{form.Upload_Image}}
+              <label class="custom-file-label" for="imagem">Escolher arquivo da imagem</label>
+              <!-- <img style="width:150px; height:150px"> -->
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="tipoOp">Tipo</label>
+            </div>
+            
+            {{form.Type_Of_Image}}
+          </div>
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="espec">Especialidade</label>
+            </div>
+            
+            {{form.Image_Group}}
+          </div>
+          <input type="submit" value="Incluir" class="btn btn-submit active">
+        </form>
+      </div>
+
+
+
+      <div id="delete-form-container" style="display:none;">
+        <form id="delete-form" method="POST">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="espec">Especialidade</label>
+            </div>
+            {{delteImageform.Image_Group}}
+          </div>
+          <input type="submit" value="Incluir" name="btnSubmitFormDelete" class="btn btn-active">
+        </form>
+
+      </div>
+
+      <div id="edit-form-container" style="display:none;">
+        <form id="edit-form" method="POST">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="espec">Especialidade</label>
+            </div>
+            <!-- <select class="custom-select" id="espec">
+                          <option selected>Selecione a especialidade da imagem ...</option>
+                          <option value="1">Cardiologia</option>
+                          <option value="2">Neurologia</option>
+                          <option value="3">Pneumologia</option>
+                          <option value="4">Urologia</option>
+                        </select> -->
+            {{delteImageform.Image_Group}}
+          </div>
+          <input type="submit" value="Incluir" name="btnSubmitFormEdit" class="btn btn-active">
+        </form>
+
+      </div>
+
+
+
+    </div>
+    <div class="col-md-6 order-md-1">
+      <div class="col-12">
+        <img src="{% static 'assets/img/imagens.png' %}" draggable="false" alt="Cadastro de Imagens" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+{% block page_custom_js %}
+<script type="text/javascript">
+  $(document).ready(function() {
+      // hide the forms when page is ready
+      $('#delete-form-container').hide();
+      $('#edit-form-container').hide();
+  
+      $('#cIncluir').click(function(){ 
+          $('#insert-form-container').show(); 
+          $('#edit-form-container').hide(); 
+          $('#delete-form-container').hide();
+      });
+      $('#cExcluir').click(function(){ 
+        $('#insert-form-container').hide();
+        $('#edit-form-container').hide(); 
+          $('#delete-form-container').show(); 
+      });
+
+      $('#cAlterar').click(function(){ 
+          $('#insert-form-container').hide();
+            $('#delete-form-container').hide(); 
+            $('#edit-form-container').show(); 
+        });
+  });
+
+
+  document.getElementById('cPesquisar').addEventListener('click', function() {
+    location.reload();});
+
+
+  </script>
+{% endblock page_custom_js %}

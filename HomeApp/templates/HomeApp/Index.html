@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+{% endif %}
+<section class="header6 cid-sDVYaSH3EN mbr-fullscreen mbr-parallax-background" id="header6-l">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);"></div>
+
+    <div class="align-center container">
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-3 display-2">Treinamento em Imagens
+                    Médicas</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="video5 cid-sDWdChYeTx" id="video5-n">
+
+
+    <div class="container">
+        <div class="title-wrapper mb-5">
+            <h4 class="mbr-section-title mbr-fonts-style mb-0 display-2">
+                <strong>Inteligência Artificial na Medicina</strong>
+            </h4>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-6 video-block">
+                <!-- <div class="video-wrapper"><iframe class="mbr-embedded-video"
+                        src="https://www.youtube.com/embed/iqs6x3wXOAk?rel=0&amp;amp;showinfo=0&amp;autoplay=1&amp;loop=0"
+                        width="1280" height="720" frameborder="0" allowfullscreen></iframe></div> -->
+            </div>
+            <div class="col-12 col-lg">
+                <div class="text-wrapper">
+                    <h3 class="mbr-section-subtitle mbr-fonts-style mb-3 display-5">
+                        <strong>Veja uma pequena introdução</strong>
+                    </h3>
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        Leva-se tempo para que um profissional aprenda a reconhecer padrões de imagens. Este sistema
+                        visa auxiliar o estudante no seu aprimoramento na analise de imagens.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

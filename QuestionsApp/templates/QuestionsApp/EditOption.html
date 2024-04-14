@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container col-11 md-9" id="form-container">
+    <div class="row align-items-center-gx-5">
+        <div class="col-md-6 order-md-2">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <strong>As opções estão em ordem crescente, ou seja, A,B,C,D</strong>
+                {% for option in options %}
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="{{option.Id_MCQs}}" name="{{option.Id_MCQs}}" rows="5"
+                        placeholder="Descrição  da alternativa">{{option.Option_Text}}</textarea>
+                    <label for="cAssQuiz" class="form-label">Descrição da alternativa</label> <a
+                        href="{% url 'QuestionsApp:DeleteOptionView' option.Id_MCQs %}">Delete</a>
+                </div>
+
+                <div class="form-floating md-3">
+                    {% if option.Is_Right == True %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="{{option.Option}}" name="{{option.Option}}" value="True" checked>
+                        <label class="form-check-label" for="{{option.Option}}">Certo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="{{option.Option}}" name="{{option.Option}}" value="False">
+                        <label class="form-check-label" for="{{option.Option}}">Errado</label>
+                    </div>
+                    {% elif option.Is_Right == False %}
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="{{option.Option}}" name="{{option.Option}}" value="True">
+                        <label class="form-check-label" for="{{option.Option}}">Certo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="{{option.Option}}" name="{{option.Option}}" value="False" checked>
+                        <label class="form-check-label" for="{{option.Option}}">Errado</label>
+                    </div>
+
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div>
+                    <input name="btnEdit" type="submit" class="btn btn-primary btn-lg active">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/selecao.png' %}" draggable="false" alt="Questionario Professor"
+                    class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

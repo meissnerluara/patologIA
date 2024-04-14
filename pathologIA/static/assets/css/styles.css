@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+body {
+    background-color: #F8F8F8;
+}
+
+/*  Formulário */
+
+#form-container {
+    background-color: #FFF;
+    border-radius: 20px;
+    box-shadow: .5px 10px 15px rgba(0, 0, 0, .2);
+    margin: 25px auto;
+    padding: 25px
+}
+
+/* Esta media query irá fazer com que o as margens fiquem aumentadas fazendo com o que os dados
+fiquem centralizados no formulários */
+@media(min-width: 768px) {
+    #form-container {
+        margin: 50px;
+        padding: 50pxx;
+    }
+}
+
+#form-container h2 {
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+#form-container a {
+    color: #222;
+    transition: .5s;
+}
+
+#form-container a:hover {
+    color: #6C63FF;
+}
+
+#form-container form {
+    padding-bottom: 50px;
+}
+
+#form-container .form-control {
+    border: none;
+    border-bottom: 1px solid #CCC;
+    border-radius: 0;
+}
+
+#form-container .form-control:focus {
+    box-shadow: none;
+}
+
+#form-container .form-floating label {
+    color: #CCC;
+}
+
+#form-container .form-floating > .form-control:focus~label {
+    color: #222;
+}
+
+#form-container input[type="submit"],  
+#form-container input[type="checkbox"]:checked {
+    background-color: #6C63FF;
+    border-color: #6C63FF;
+}
+
+/* O botão está bom para desktop, mas, não para mobile. Então, a largura será alterada para 100%. */
+.btn.btn-primary {
+    width: 100%;
+    margin-top: 25px;
+}
+
+/* Resoluções acima de 768 px a largura será automática*/
+@media(min-width: 768px) {
+    .btn.btn-primary {
+        width: auto;
+    }
+}
+/* Imagem */
+
+.row.align-items-center {
+    align-content: center;
+    height: 100%;
+    padding: 50px 0;
+}
+
+/* Espaçando o botão da Imagem */
+.col.md-6.order-md-1 {
+    padding-top: 50px;
+}
+
+@media(min-width: 768px) {
+    .col.md-6.order-md-1 {
+        padding-top: 0;
+    }
+}
+
+#link-container {
+    text-align: center;
+    padding-top: 50px;
+}

@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+/* Configuração da tabela */
+table#tabartigo {
+    /* Borda da borda externa da tabela com 1px de espessura, tipo sólida e cor cinza escuro */
+    border: 1px solid #606060;
+    /* border-spacing remove o espaço existente entre as celulas */
+    border-spacing: 0px;
+    /* Configurando as margens esquerda e direita das células como automáticas */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Configuração das células internas da tabela */
+table#tabartigo td {
+    border: 1px solid #606060;
+    /* Configurando espaços de 10 px em torno das células */
+    padding: 10px;
+    /* Alinhamento horizontal das células, neste caso, no centro */
+    text-align: center;
+    /* Alinhamento vertical das células, neste caso, no meio */
+    vertical-align: middle;
+}
+
+/* Configuração da classe ce. A sintaxe é td.ce, onde td é a tag e ce a classe */
+table#tabartigo td.ce {
+    /* Cor da fonte branco */
+    color: #000000;
+    background-color: #cecece;
+    /* Cor de fundo, cinza escuro */
+    /* background-color: #606060; */
+    /* Texto ficará alinhado no topo das células */
+    vertical-align: top;
+    /* Fonte das células da coluna esquerda estarão em negrito */
+    font-weight: bold;
+}
+
+/* Configuração da classe cd. A sintaxe é td.cd, onde td é a tag e cd a classe */
+table#tabartigo td.cd {
+    /* Cor de fundo, cinza claro */
+    background-color: #cecece;
+}
+
+/* Configuração do <caption> que é o titulo da tabela */
+table#tabartigo caption {
+    /* Corda da fonte */
+    color:#888888;
+    /* Tamanho da fonte */
+    font-size: 14pt;
+    /* Tipo da fonte */
+    font-weight: bolder;
+}
+
+/* Configurando o <span> que está dentro do <caption> no título do tabela */
+table#tabartigo caption span {
+    /* Configurando o span dentro de um bloco flutuante */
+    display:block;
+    /* Flutuação a direita */
+    float:right;
+    /* cor da fonte preto */
+    color:black;
+    /* Tamanho da fonte de 8 pt */
+    font-size: 8pt;
+    /* Aumentando a distância da margem de topo */
+    margin-top: 10px;
+}

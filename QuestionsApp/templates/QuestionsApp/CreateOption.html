@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Elaboração de Alternativas</h2>
+            <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+                <input type="button" class="btn btn-info" name="options" id="cIncluir" value="Incluir">
+
+                <input type="button" class="btn btn-info" name="options" id="cAlterar" value="Alterar">
+
+                <input type="button" class="btn btn-info" name="options" id="cExcluir" value="Excluir">
+
+                <input type="button" class="btn btn-info" name="options" id="cPesquisar" value="Limpar">
+            </div>
+            <div id="form-view">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-floating mb-3">
+                        <!-- <input type="number" class="form-control" id="cIdQuestao" name="tIdQuestao" placeholder="Identificação da Questão"> -->
+                        {{form.Related_Question}}
+                        <!-- <label for="cIdQuiz" class="form-label">Identificação da Questão</label> -->
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <!-- <textarea class="form-control" id="cAssQuiz" name="tAssQuiz" rows="5" placeholder="Descrição  da alternativa"></textarea> -->
+                        {{form.Option_Text}}
+                        <label for="cAssQuiz" class="form-label">Descrição da alternativa</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <!-- <input type="text" class="form-control" id="cOpcao" name="tOpcao" placeholder="Opção"> -->
+                        {{form.Option}}
+                        <label for="name" class="form-label">Nome da opção(A,B,C,D)</label>
+                    </div>
+
+                    <!-- <div class="form-floating mb-3">
+                        <textarea class="form-control" id="cAjuda" name="tAjuda" rows="5" placeholder="Ajuda"></textarea>
+                        <label for="cAssQuiz" class="form-label">Ajuda</label>
+                </div>    -->
+
+                    <div class="form-floating md-3">
+                        <p><b>Selecione o Status da Alternativa</b></p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdCerto" name="status" value="True"
+                                >
+                            <label class="form-check-label" for="cIdCerto">Certo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdErrado" name="status" value="False" checked>
+                            <label class="form-check-label" for="cIdErrado">Errado</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <input name="btnCreateAnother" class="btn btn-primary btn-lg active" type="submit"
+                            value="Criar próxima opção">
+                        <input name="btnFinish" class="btn btn-primary btn-lg active" type="submit" value="Terminar">
+                        <!-- <input type="submit" class="btn btn-primary" value="Elaborar Questões"> -->
+                    </div>
+                </form>
+            </div>
+            <div id="edit-view">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-floating mb-3">
+                        {{editForm.Related_Question}}
+                    </div>
+
+                    <div>
+                        <input name="btnEdit" class="btn btn-primary btn-lg active" type="submit"
+                            value="Enviar">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/selecao.png' %}" draggable="false" alt="Questionario Professor"
+                    class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block page_custom_js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // hide the forms when page is ready
+        $('#edit-view').hide();
+
+        $('#cIncluir').click(function () {
+            $('#edit-view').hide();
+            $('#form-view').show();
+        });
+        $('#cAlterar').click(function () {
+            $('#edit-view').show();
+            $('#form-view').hide();
+        });
+        $('#cExcluir').click(function () {
+            $('#edit-view').show();
+            $('#form-view').hide();
+        })
+    });
+
+
+    document.getElementById('cPesquisar').addEventListener('click', function () {
+        location.reload();
+    });
+
+
+</script>
+{% endblock page_custom_js %}

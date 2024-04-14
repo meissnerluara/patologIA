@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon-1.ico' %}" type="image/x-icon">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"></script>
+  <script src="{% static 'assets/jscript/disable_browser_history.js' %}"></script>
+
+  <!-- ------------------------------------------------------------------- -->
+
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- CSS do projeto -->
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/imagens.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Função javascript previewImage() para visualizar imagdem -->
+    <script language="javascript" src="{% static 'assets/_js/imagens.js' %}"></script>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous" defer></script>
+
+    <link rel="stylesheet" href="{% static 'assets/web/assets/mobirise-icons2/mobirise2.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/tether/tether.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-grid.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-reboot.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/dropdown/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/socicon/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/theme/css/style.css' %}">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+    <link rel="preload" as="style" href="{% static 'assets/mobirise/css/mbr-additional.css' %}"><link rel="stylesheet" href="{% static 'assets/mobirise/css/mbr-additional.css' %}" type="text/css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- SheetJS library for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+
+    <script>
+        // Function to export data to Excel
+        function exportToExcel() {
+            // Get table data
+            var table = document.getElementById("resultTable");
+            var data = XLSX.utils.table_to_sheet(table);
+
+            // Create a workbook with one sheet
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, data, "Results");
+
+            // Save the workbook as an Excel file
+            XLSX.writeFile(wb, 'result.xlsx');
+        }
+    </script>
+
+    <title>Resultado</title>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <form action="" method="post">
+        <!-- Use um link para acionar a geração de Planilha Excel -->
+          <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+          <button type="button" class="btn btn-primary" onclick="exportToExcel();">Gerar Relatório</button>
+          <a href="{% url 'HomeApp:HomePageView' %}"><button type="button" class="btn btn-primary"> Página
+              Principal </button></a>
+          </div>
+      </form>
+      <h2>Tabela de Questões</h2>
+      <table id="resultTable" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Questão Text</th>
+            <th>Resposta</th>
+            <th>Pontuação</th>
+            <th>Concluído em</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for data in Temp_Result %}
+          <tr>
+            <td>{{ data.Question_Information.Id_Question }}</td>
+            <td>{{ data.Question_Information.Question_Text }}</td>
+            <td>
+              {% if data.Score_Per_Question == 0.00 %}
+                Wrong
+              {% else %}
+                Right
+              {% endif %}
+            </td>
+            <td>{{ data.Score_Per_Question }}</td>
+            <td>{{ data.Completed_At }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  </html>

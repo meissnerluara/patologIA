@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Selecione o Questionário</h2>
+
+            <div id="form-view">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-floating mb-3">
+                        {{form.Name_Of_Group}}
+                    </div>
+                        <input name="btnCreateAnother" class="btn btn-primary btn-lg active" type="submit" value="Próxima">
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/selecao.png' %}" draggable="false" alt="Questionario Professor"
+                    class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

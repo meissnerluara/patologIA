@@ -1,0 +1,117 @@
+
+{% block content %}
+{% load static %}
+<br>
+<br>
+<br>
+<br>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Análise de Imagens Médicas com IA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Análise de Imagens Médicas com IA.">
+
+<!--CSS Stylesheets-->
+<link rel="stylesheet" href="{% static 'AIassets/tuberculose/css/formato.css' %}">
+
+<!--Fonte do texto-->
+<style>
+html,body,h2,h3,h4,p,h5,li {font-family: Arial, sans-serif}
+</style>
+
+</head>
+
+<!--Cor de fundo-->
+<body class="bground-color">
+	<section id="appointment" class="appointment section-bg">
+        <div class="container">
+<!-- w3-content define um contêiner para conteúdo centrado em tamanho fixo e envolve todo o conteúdo da página. -->
+<div class="w3-content" style="max-width:960px">
+
+<!-- HOME PAGE -->
+<div class="tabbed w3-animate-opacity w3-white" id="home">
+	
+<!-- Top Bar -->
+<div class='w3-center'>
+	
+	<p class="space-letters-large w3-xxlarge w3-tag bground-color w3-blue w3-text-white w3-border w3-round">
+		<a class="change-size"><b>Bem-Vindo ao Analisador de Imagens Médicas Baseado em IA-Tuberculose</b></a>
+</div>
+
+<!-- Espaço para mostrar a imagem -->
+<div class="w3-center w3-padding-bottom">
+	
+	<img id="selected-image" class="w3-round adjust-image" height="250"> 
+	
+</div> 
+
+<!-- Botão -->
+<div id="btnn" class="w3-center">
+	
+	<button class="w3-btn w3-blue w3-hover-blue w3-round w3-margin-bottom adjust-spacing btn-font w3-padding w3-space-letters w3-text-white" onclick="setTimeout(simulateClick.bind(null, 'image-selector'), 200)"><b>Analisar Imagem</b></button>
+
+</div> 
+
+<!-- Mensagem caso não encontre o modelo -->
+<div class="w3-center">
+	<div  class="progress-bar w3-text-teal space-letters">
+	<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+	<p>Tentando Carregar o Modelo...</p></div>
+</div>
+
+<!-- Resultado -->
+<div class="w3-center w3-border add-margin side-margin w3-round w3-white
+text-color space-letters bottom-margin dont-break-out">
+
+	<p>Resultado da Análise</p>
+	<ol class='w3-left-align text-color' id='prediction-list'></ol>
+		
+</div>
+
+<!-- Bottom Bar -->
+<div class='w3-center w3-padding-bottom'>
+	<p class="space-letters">
+		<div class="w3-center w3-padding-bottom">
+			<img id="selected-image" class="w3-round adjust-image" src="{% static 'AIassets/tuberculose/imagens/IAModelo.png' %}" height="250" alt="Projeto">
+		</div> 
+	</p>
+</div>
+
+</div>
+<!--Fim da HOME PAGE-->
+
+<!--Previsões-->
+<div class="hide">
+	<button id='predict-button'></button>
+</div>
+
+<div class="hide">
+	<input id="image-selector" type="file" multiple>
+</div>
+
+	<!-- Carrega jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+
+	</script>
+	
+	<!-- Carrega TensorFlow.js -->
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> 
+	</script>
+	
+	
+	<!-- Carrega os arquivos js -->
+	<script src="{% static 'AIassets/tuberculose/jscript/labels.js' %}"></script>
+	<script src="{% static 'AIassets/tuberculose/jscript/modelo.js' %}"></script>
+	<script src="{% static 'AIassets/tuberculose/jscript/previsoes.js' %}"></script>
+	
+	
+</div> 
+</div>
+</section>
+</body>
+</html>
+{% endblock content %}
+

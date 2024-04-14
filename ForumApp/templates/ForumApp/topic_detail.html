@@ -1,0 +1,29 @@
+{% extends "ForumApp/base.html" %}
+{% block frmcontent %}
+
+    <div class="col-4 offset-4 mt-5">
+        <h1 id="header">{{ object.title }}</h1>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <div class="col-4 offset-4">
+            <a class="btn btn-warning btn-sm mt-1 mb-1" href="{% url 'forum:post-create' object.id %}">new post</a>
+        </div>
+    {% endif %}
+
+    <div class="posts mt-5">
+        {% for post in posts %}
+            <div class="row post mb-4">
+                <div class="col-4 offset-4 text-center">
+                    <a href="{% url 'forum:post-detail' post.id %}">
+                        <h3 class="post_title">{{ post.title }}</h3></a> <p> by {{ post.author }} </p>
+                       
+                        </a>
+                    </a>
+                    <hr>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock frmcontent %} 

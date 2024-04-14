@@ -1,0 +1,54 @@
+<!-- search_student_performance.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="justify-content-center">
+    <div class="row col-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h1 class="mb-0">Pesquisar desempenho dos alunos</h1>
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+    </div>
+    {% if Group_Information %}
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-6">
+        <h1 class="mt-4">Questionário Múltipla Escolha</h1>
+        <ul class="list-group">
+          {% for group_info in Group_Information %}
+          <li class="list-group-item">
+            <strong>Questionário:</strong> {{ group_info.Question_Group_Information__Name_Of_Group }}<br>
+            <strong>Pontuação:</strong> {{ group_info.total_score }}<br>
+            <!-- <strong>Concluído em:</strong> {{ group_info.Completed_At }} -->
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- Right Column -->
+      <div class="col-md-6">
+        <h1 class="mt-4">Questionário de Demarcação</h1>
+        <ul class="list-group">
+          {% for group_info_D in Group_Information_Demarcate %}
+          <li class="list-group-item">
+            <strong>Questionário (Demarcação):</strong> {{ group_info_D.Question_Group_Information__Name_Of_Group }}<br>
+            <strong>Pontuação (Demarcação):</strong> {{ group_info_D.total_score }}<br>
+            <!-- <strong>Concluído em:</strong> {{ group_info.Completed_At }} -->
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

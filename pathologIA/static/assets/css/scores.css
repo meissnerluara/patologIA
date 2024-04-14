@@ -1,0 +1,14 @@
+#highScoresList {
+	list-style: none;
+	margin: 3rem 3rem;
+}
+
+.box #highScoresList{
+	align-content: center;
+	padding-left: 3rem;
+}
+
+.high-score {
+	font-size: 1.8rem;
+	margin-bottom: 0.5rem;
+}

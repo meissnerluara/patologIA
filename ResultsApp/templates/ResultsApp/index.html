@@ -1,0 +1,40 @@
+<!-- student_results.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+
+    <div class="container">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-6">
+                <h1 class="mt-4">Questionário Múltipla Escolha</h1>
+                <ul class="list-group">
+                    {% for group_info in Group_Information %}
+                        <li class="list-group-item">
+                            <strong>Questionário:</strong> {{ group_info.Question_Group_Information__Name_Of_Group }}<br>
+                            <strong>Pontuação:</strong> {{ group_info.total_score }}<br>
+                            <!-- <strong>Concluído em:</strong> {{ group_info.Completed_At }} -->
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- Right Column -->
+            <div class="col-md-6">
+                <h1 class="mt-4">Demarcar questão</h1>
+                <ul class="list-group">
+                    {% for group_info_D in Group_Information_Demarcate %}
+                        <li class="list-group-item">
+                            <strong>Questionário:</strong> {{ group_info_D.Question_Group_Information__Name_Of_Group }}<br>
+                            <strong>Pontuação:</strong> {{ group_info_D.total_score }}<br>
+                            <!-- <strong>Concluído em:</strong> {{ group_info.Completed_At }} -->
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

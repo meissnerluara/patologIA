@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    {% for image in list_of_images %}
+    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+      <img
+        src="{{image.Upload_Image.url}}"
+        class="w-100 shadow-1-strong rounded mb-4"
+        alt="Boat on Calm Water"
+      />
+        <a href="{% url 'ImagesApp:DeleteImageView' image.Id_Image %}">Excluir a Imagem</a>
+        <strong>ou</strong>
+        <a href="{% url 'ImagesApp:EditImageView' image.Id_Image %}">Editar</a>
+
+    </div>
+    {% endfor %}
+    
+              
+    
+  </div>
+  <!-- Gallery -->
+  {% endblock content %}

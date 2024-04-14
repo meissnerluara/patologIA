@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon-1.ico' %}" type="image/x-icon">
+
+
+
+    <title>Lado do Professor</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container h-100">
+
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group text-center">
+
+                <input type="text" id="width" name="width" hidden>
+
+                <input type="text" id="height" name="height" hidden>
+
+                <input type="text" id="startX" name="startX" hidden>
+
+                <input type="text" id="startY" name="startY" hidden>
+
+
+                <select class="form-control" name="Question_List" required>
+                    <option value="">Selecione o texto da pergunta</option>
+                    {% for Question in List_of_Questions %}
+                    <option value="{{Question.Id_Question}}">{{Question.Question_Text}}</option>
+                    {% endfor %}
+                </select>
+
+                <canvas id="my-canvas" width="400" height="400" style="border: 1px solid black;"></canvas>
+
+                <input class="form-control btn btn-primary" type="submit" value="Incluir">
+
+            </div>
+        </form>
+    </div>
+    <script>
+        var canvas = document.getElementById('my-canvas');
+        var ctx = canvas.getContext('2d');
+        var isDrawing = false;
+        var startX, startY;
+        var width, height;
+
+        var img = new Image();
+        img.onload = function () {
+            canvas.width = img.width; // Define a largura da tela para corresponder à largura da imagem
+            canvas.height = img.height; // Define a altura da tela para corresponder à altura da imagem
+            ctx.drawImage(img, 0, 0, img.width, img.height); // Desenhe a imagem em seu tamanho original
+        };
+        
+        img.src = '{{ instance.Upload_Image.url }}';
+
+        canvas.addEventListener('mousedown', function (e) {
+            isDrawing = true;
+            startX = e.offsetX;
+            startY = e.offsetY;
+        });
+
+        canvas.addEventListener('mousemove', function (e) {
+            if (isDrawing) {
+
+                width = e.offsetX - startX;
+                height = e.offsetY - startY;
+
+                // check if the mouse is within the canvas boundaries
+                if (e.offsetX > canvas.width) {
+                    width = canvas.width - startX;
+                }
+                if (e.offsetY > canvas.height) {
+                    height = canvas.height - startY;
+                }
+                if (startX + width > canvas.width) {
+                    width = canvas.width - startX;
+                }
+                if (startY + height > canvas.height) {
+                    height = canvas.height - startY;
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+                ctx.fillRect(startX, startY, width, height);
+            }
+        });
+
+        canvas.addEventListener('mouseup', function (e) {
+            isDrawing = false;
+
+            document.getElementById("width").value = width
+            document.getElementById("height").value = height
+            document.getElementById("startX").value = startX
+            document.getElementById("startY").value = startY
+        });
+
+    </script>
+
+
+
+
+</body>
+
+</html>

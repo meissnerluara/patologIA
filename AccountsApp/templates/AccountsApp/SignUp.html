@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6">
+            <h2>Realize seu Cadastro</h2>
+
+            {% if not request.user.Role.Role_Type == "student" %}
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    {{form.username}}
+                    <label for="username" class="form-label">Entre com seu nome de usuário</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{form.first_name}}
+                    <label for="name" class="form-label">Informe seu Nome</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{form.last_name}}
+                    <label for="lastname" class="form-label">Informe seu Sobrenome</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{form.email}}
+                    <label for="email" class="form-label">Informe seu e-mail</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{form.Mobile_Number}}
+                    <label for="fone" class="form-label">Informe seu celular</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{form.password}}
+                    <label for="password" class="form-label">Informe sua Senha</label>
+                </div>
+                <div class="form-floating mb-3">
+                    {{form.confirm_password}}
+                    <label for="confirmpassword" class="form-label">Confirme sua Senha</label>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="SelectOp">Categoria</label>
+                    </div>
+                    {{form.Role}}
+                </div>
+                <div class="mb-3">
+                    <div class="form-check mb-2">
+                        {{form.Accept_Terms_of_Services}}
+                        <label for="agree-form" class="form-check-label">
+                            Você aceita os <a href="#">termos de serviço?</a>
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        {{form.Receive_News}}
+                        <label for="agree-form" class="form-check-label">
+                            Deseja receber nossas notícias?
+                        </label>
+                    </div>
+
+
+                    <input type="submit" class="btn btn-primary" value="Cadastrar">
+
+            </form>
+            
+            {% else %}
+
+            <h3>Os alunos não têm permissão para acessar esta página</h3>
+
+            {% endif %}
+
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

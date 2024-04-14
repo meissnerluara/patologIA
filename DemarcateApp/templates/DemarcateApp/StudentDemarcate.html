@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon-1.ico' %}" type="image/x-icon">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+<script src="{% static 'assets/jscript/disable_browser_history.js' %}"></script>
+
+<!-- ------------------------------------------------------------------- -->
+
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <!-- CSS do projeto -->
+  <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/imagens.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Função javascript previewImage() para visualizar imagdem -->
+  <script language="javascript" src="{% static 'assets/_js/imagens.js' %}"></script>
+  
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous" defer></script>
+  
+  <link rel="stylesheet" href="{% static 'assets/web/assets/mobirise-icons2/mobirise2.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/tether/tether.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-grid.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap-reboot.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/dropdown/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/socicon/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/theme/css/style.css' %}">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+  <link rel="preload" as="style" href="{% static 'assets/mobirise/css/mbr-additional.css' %}"><link rel="stylesheet" href="{% static 'assets/mobirise/css/mbr-additional.css' %}" type="text/css">
+  <!-- jQuery library -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+  
+  <!-- Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Folha de respostas</title>
+</head>
+
+<body>
+
+
+    <div class="container h-100 text-center">
+
+        <h2>{{Demarcate_Question_List.Related_Question}}</h2>
+    
+        {% if is_wrong %}
+        <div class="alert alert-danger" role="alert">
+            Resposta errada, você tem mais 1 tentativa
+        </div>
+        {% endif %}
+
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-md-6"><!--hud-item-->
+              <p class="hud-prefix">
+                Questão
+              </p>
+              <!-- Contador do número de questões -->
+              <h2 class="hud-main-text" id="questionCounter">
+                {{current_question}}/{{Total_Questions}}
+              </h2>
+            </div><!--hud-item-->
+            <div class="col-md-6"><!--hud-item-->
+              <p class="hud-prefix">
+                Pontuação
+              </p>
+              <h2 class="hud-main-text" id="score">
+                {{ Total_Score }}
+              </h2>
+            </div><!--hud-item-->
+          </div><!--hud-->
+
+    
+        <form action="" method="post">
+            {% csrf_token %}
+    
+            <div class="form-group text-center">
+    
+                <input type="text" id="width" name="width" hidden>
+    
+                <input type="text" id="height" name="height" hidden>
+    
+                <input type="text" id="startX" name="startX" hidden>
+    
+                <input type="text" id="startY" name="startY" hidden>
+    
+                <canvas id="my-canvas" width="400" height="400" style="border: 1px solid black;"></canvas>
+                <input class="form-control btn btn-primary btn-block" type="submit" value="Enviar">
+                
+            </div>
+        </form>
+    </div>
+    
+
+    <script>
+        var canvas = document.getElementById('my-canvas');
+        var ctx = canvas.getContext('2d');
+        var isDrawing = false;
+        var startX, startY;
+        var width, height;
+
+        var img = new Image();
+        img.onload = function () {
+            canvas.width = img.width; // Defina a largura da tela para corresponder à largura da imagem
+            canvas.height = img.height; // Defina a altura da tela para corresponder à altura da imagem
+            ctx.drawImage(img, 0, 0, img.width, img.height); // Desenhe a imagem em seu tamanho original
+        };
+        
+        img.src = '{{ Demarcate_Question_List.Question_Image.Upload_Image.url }}';
+
+        canvas.addEventListener('mousedown', function (e) {
+            isDrawing = true;
+            startX = e.offsetX;
+            startY = e.offsetY;
+        });
+
+        canvas.addEventListener('mousemove', function (e) {
+            if (isDrawing) {
+
+                width = e.offsetX - startX;
+                height = e.offsetY - startY;
+
+                // check if the mouse is within the canvas boundaries
+                if (e.offsetX > canvas.width) {
+                    width = canvas.width - startX;
+                }
+                if (e.offsetY > canvas.height) {
+                    height = canvas.height - startY;
+                }
+                if (startX + width > canvas.width) {
+                    width = canvas.width - startX;
+                }
+                if (startY + height > canvas.height) {
+                    height = canvas.height - startY;
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+                ctx.fillRect(startX, startY, width, height);
+            }
+        });
+
+        canvas.addEventListener('mouseup', function (e) {
+            isDrawing = false;
+
+            document.getElementById("width").value = width
+            document.getElementById("height").value = height
+            document.getElementById("startX").value = startX
+            document.getElementById("startY").value = startY
+        });
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

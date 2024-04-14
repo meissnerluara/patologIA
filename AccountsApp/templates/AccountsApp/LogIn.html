@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Faça o Login para Continuar</h2>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail">
+                    <label for="email" class="form-label">Digite seu e-mail</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Digite sua senha">
+                    <label for="password" class="form-label">Digite sua senha</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="SelectOp">Categoria</label>
+                    </div>
+                    <select class="custom-select" id="SelectOp" name="Role">
+                        <option selected>Escolha sua opção ...</option>
+                        {% for role in Roles %}
+                        <option value="{{role.Role_Type}}">{{role.Role_Type}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <input type="submit" class="btn btn-primary" value="Entrar">
+            </form>
+            {% if error_message %}
+            <h2>{{error_message}}</h2>
+            {% endif %}
+        </div>
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/sign_in.svg' %}" alt="Entrar no Sistema" class="img-fluid">
+            </div>
+            <!-- O atributo id="link-container" significa que será feito um link para mudar de página -->
+            {% if not request.user.Role.Role_Type == "estudante" %}
+            <div class="col-12" id="link-container">
+                <a href="{% url 'AccountsApp:SignUpView' %}">Não Tenho uma Conta</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

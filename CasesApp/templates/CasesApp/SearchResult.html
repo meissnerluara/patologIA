@@ -1,0 +1,21 @@
+<table>
+    <thead>
+      <tr>
+        <th>Case Study Number</th>
+        <th>Case Study File</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for case in results %}
+        <tr>
+          <td>{{ case.CaseStudyNumber }}</td>
+          <td><a href="{{ case.CaseStudyFile.url }}">{{ case.CaseStudyFileName }}</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="2">No results found</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  

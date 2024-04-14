@@ -1,0 +1,44 @@
+<!-- Obtenha o questionário criado pelo professor atualmente conectado -->
+<!-- search_student_performance.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <div class="justify-content-center">
+
+    {% if student_performances %}
+    <div class="row">
+      <!-- Left Column -->
+      <div class="col-md-6">
+        <h1 class="mt-4">Questionário Múltipla Escolha</h1>
+        <ul class="list-group">
+          {% for group_info in student_performances %}
+          <li class="list-group-item">
+            <strong>Questionário:</strong><a href="{% url 'ResultsApp:GetStudentDoneQuestionnaireView' group_info.Question_Group_Information.Id_QuestionGroup %}">{{ group_info.Question_Group_Information }}</a><br>
+
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- right column -->
+      <div class="col-md-6">
+        <h1 class="mt-4">Demarcar Questão</h1>
+        <ul class="list-group">
+          {% for group_info_D in student_performances_demarcate %}
+          <li class="list-group-item">
+            <strong>Questionário:</strong><a href="{% url 'ResultsApp:GetStudentDemarcateDoneQuestionnaireView' group_info_D.Question_Group_Information.Id_QuestionGroup  %}">{{ group_info_D.Question_Group_Information }}</a><br>
+
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

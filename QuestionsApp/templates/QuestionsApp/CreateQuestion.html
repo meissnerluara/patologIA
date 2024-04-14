@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Elaboração das Questões</h2>
+            <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+
+                <input type="button" class="btn btn-info" name="options" id="cAlterar" value="Alterar">
+
+                <input type="button" class="btn btn-info" name="options" id="cExcluir" value="Excluir">
+
+                <input type="button" class="btn btn-info" name="options" id="cPesquisar" value="Limpar">
+            </div>
+            <div id="form-view">
+                <form method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        {{form.Group_Name_Of_Quesitons}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.Question_Text}}
+                        <label for="cDesc" class="form-label">Descrição da Questão</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.Question_Marks}}
+                        <label for="cIdPeso" class="form-label">Valor da Questão</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.Image_For_Question}}
+                        <strong>Não tem certeza sobre o número da imagem?<a href="{% url 'QuestionsApp:ImagesGridView' %}"
+                                target=”_blank”>Clique aqui para ver a referência!</a></strong>
+
+                                 
+                    </div>
+                    
+                    <div>
+                        <input type="submit" class="btn btn-primary btn-lg active" value="Alternativas">
+                    </div>
+                </form>
+            </div>
+
+            <div id="edit-view">
+                <form method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3">
+                        {{eidtform.Question_Number}}
+                    </div>
+                    
+                    <div class="btn-group btn-group-toggle">
+                        <input type="submit" name="editButton" class="btn btn-primary btn-lg active" value="Editar">
+                        <input type="submit" name="deleteButton" class="btn btn-primary btn-lg active" style="margin-left: 5px;" value="Excluir">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/selecao.png' %}" draggable="false" alt="Questões" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block page_custom_js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // hide the forms when page is ready
+        $('#edit-view').hide();
+
+        $('#cIncluir').click(function () {
+            $('#edit-view').hide();
+            $('#form-view').show();
+        });
+        $('#cAlterar').click(function () {
+            $('#edit-view').show();
+            $('#form-view').hide();
+        });
+        $('#cExcluir').click(function () {
+            $('#edit-view').show();
+            $('#form-view').hide();
+        })
+    });
+
+
+    document.getElementById('cPesquisar').addEventListener('click', function () {
+        location.reload();
+    });
+
+
+</script>
+{% endblock page_custom_js %}

@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'assets/css/table_scrollbar.css' %}">
+{% endblock custom_css %}
+{% block content %}
+<div class="container col-11 md-9" id="form-container">
+    <!-- O conteúdo da linha será alinhado ao centro e teremos espaço de 5 colunas entre o texto e a figura -->
+    <div class="row align-items-center-gx-5">
+        <!-- Na tela responsiva a ordem 2 significa que a imagem ficará abaixo do texto quando reduzida -->
+        <div class="col-md-6 order-md-2">
+            <h2>Elaboração Questionário Professor</h2>
+            <div class="btn-group btn-group-toggle" id="cButtons" data-toggle="buttons">
+
+                <input type="button" class="btn btn-info" name="options" id="cAlterar" value="Alterar">
+
+                <input type="button" class="btn btn-info" name="options" id="cExcluir" value="Excluir">
+
+                <input type="button" class="btn btn-info" name="options" id="cPesquisar" value="Limpar">
+            </div>
+            <div id="form-view">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-floating mb-3">
+                        {{form.Name_Of_Group}}
+                        <!-- <input type="text" class="form-control" id="cTitQuiz" name="tTitQuiz" placeholder="Título do questionário"> -->
+                        <label for="cTitQuiz" class="form-label">Título do questionário</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{form.Subject_Description}}
+                        <!-- <textarea class="form-control" id="cAssQuiz" name="tAssQuiz" rows="5" placeholder="Descrição do assunto do questionário"></textarea> -->
+                        <label for="cAssQuiz" class="form-label">Descrição do assunto do questionário</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        {{form.Date_Of_Creation}}
+                        <!-- <input type="date" class="form-control" id="cIdDataQuiz" name="tIdDataQuiz" placeholder="Data do cadastro do Questionário"> -->
+                        <label for="cIdDataQuiz" class="form-label">Data do Questionário</label>
+                    </div>
+
+                    <!-- For Demarcate Step -->
+
+                    <div class="form-floating md-3">
+                        <p><b>Este é um Questionário de demarcação de imagens?</b></p>
+
+                       {% if Is_Demarcate == 'True' %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdAberto" name="Is_Demarcate" value="True" checked>
+                            <label class="form-check-label" for="cIdAberto">Certo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdFechado" name="Is_Demarcate" value="False">
+                            <label class="form-check-label" for="cIdFechado">Errado</label>
+                        </div>
+                        {% elif  Is_Demarcate == 'False' %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdAberto" name="Is_Demarcate" value="True" >
+                            <label class="form-check-label" for="cIdAberto">Certo</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdFechado" name="Is_Demarcate" value="False" checked>
+                            <label class="form-check-label" for="cIdFechado">Errado</label>
+                        </div>
+                        {% else %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdAberto" name="Is_Demarcate" value="True" checked>
+                            <label class="form-check-label" for="cIdAberto">Certo</label>
+                        </div>
+                      
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdFechado" name="Is_Demarcate" value="False">
+                            <label class="form-check-label" for="cIdFechado">Errado</label>
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+
+
+
+                    <!-- For Online Status -->
+
+                    <div class="form-floating md-3">
+                        <p><b>Selecione o Status do Questionário</b></p>
+
+                       {% if Online_Status == 'True' %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdAberto" name="status" value="True" checked>
+                            <label class="form-check-label" for="cIdAberto">Aberto</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdFechado" name="status" value="False">
+                            <label class="form-check-label" for="cIdFechado">Fechado</label>
+                        </div>
+                        {% elif  Online_Status == 'False' %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdAberto" name="status" value="True" >
+                            <label class="form-check-label" for="cIdAberto">Aberto</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdFechado" name="status" value="False" checked>
+                            <label class="form-check-label" for="cIdFechado">Fechado</label>
+                        </div>
+                        {% else %}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdAberto" name="status" value="True" checked>
+                            <label class="form-check-label" for="cIdAberto">Aberto</label>
+                        </div>
+                      
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cIdFechado" name="status" value="False">
+                            <label class="form-check-label" for="cIdFechado">Fechado</label>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <!-- <a href="{% url 'QuestionsApp:CreateQuestionView' %}" class="btn btn-primary btn-lg active" role="submit" type="submit" aria-pressed="true">Elaborar Questões</a> -->
+                        <input type="submit" class="btn btn-primary btn-lg active" value="Elaborar Questões">
+
+                    </div>
+                </form>
+
+            </div>
+            <!-- To Show the Edit view in the same page -->
+
+            <div id="table-view">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%;" scope="col">Identificador</th>
+                                <th style="width: 5%;" scope="col">Questionário</th>
+                                <th style="width: 20%;" scope="col">Título</th>
+                                <th style="width: 25%;" scope="col">Descrição</th>
+                                <th style="width: 25%;" scope="col">Data de Criação</th>
+                                <th style="width: 20%;" scope="col">Ação</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for questionnaire in Questionnaire_Information %}
+                            <tr>
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td>{{questionnaire.Group_Number}}</td>
+                                <td>{{questionnaire.Name_Of_Group}}</td>
+                                <td>{{questionnaire.Subject_Description}}</td>
+                                <td>{{questionnaire.Date_Of_Creation}}</td>
+                                <td><a href="{% url 'QuestionsApp:EditQuestionGroupView' questionnaire.Id_QuestionGroup  %}"><strong>Editar</strong></a> Ou <a href="{% url 'QuestionsApp:DeleteQuestionGroupView' questionnaire.Id_QuestionGroup  %}"><strong>Excluir</strong></a>
+                                </td>
+
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 order-md-1">
+            <div class="col-12">
+                <img src="{% static 'assets/img/questionario.png' %}" draggable="false" alt="Questionario Professor"
+                    class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block page_custom_js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // hide the forms when page is ready
+        $('#table-view').hide();
+
+        $('#cIncluir').click(function () {
+            $('#table-view').hide();
+            $('#form-view').show();
+        });
+        $('#cAlterar').click(function () {
+            $('#table-view').show();
+            $('#form-view').hide();
+        });
+        $('#cExcluir').click(function () {
+            $('#table-view').show();
+            $('#form-view').hide();
+        })
+    });
+
+
+    document.getElementById('cPesquisar').addEventListener('click', function () {
+        location.reload();
+    });
+
+
+</script>
+{% endblock page_custom_js %}
