@@ -101,7 +101,10 @@ WSGI_APPLICATION = 'pathologIA.wsgi.application'
 #}
 
 DATABASES = {
-    'default': dj_database_url.parse("mysql://root:qfRYeLRdlRrcGaZrLlzrOMoRGwzaTZaN@switchback.proxy.rlwy.net:41268/railway", conn_max_age=600),
+    'default': dj_database_url.parse(
+        "mysql://root:qfRYeLRdlRrcGaZrLlzrOMoRGwzaTZaN@switchback.proxy.rlwy.net:41268/railway",
+        conn_max_age=600
+    ),
 }
 
 
