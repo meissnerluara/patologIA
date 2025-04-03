@@ -1,5 +1,8 @@
 #!/bin/bash
 
+pip install --upgrade pip
+pip install --force-reinstall Django
+
 # Instalar dependências
 pip install -r requirements.txt
 
